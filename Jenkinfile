@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git-Checkout') {
+            steps {
+                echo 'Checking out from Git Repo'
+                git branch: 'main', changelog: false, credentialsId: 'a77b18a5-7558-4a34-8338-a31ceb2babe9', poll: false, url: 'https://github.com/vistaar1999/mvnwebapp.git'
+            }
+        }
+         stage('Build') {
+            steps {
+                echo 'Building the Checked-out project '
+                bat 'mvn package'
+            }
+        }
+          stage('Deploy') {
+            steps {
+                echo 'Deploying'
+                deploy adapters: [tomcat9(credentialsId: 'f77e0c68-c9af-42e6-9fd2-78bd57fa9e03', path: '', url: 'http://localhost:8080/')], contextPath: 'mvnwebapp1', onFailure: false, war: '**/*.war'
+            }
+        }
+    }
+}
