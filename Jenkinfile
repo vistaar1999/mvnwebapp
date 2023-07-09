@@ -20,5 +20,14 @@ pipeline {
                 bat 'docker build -t vistaark9/first-container .'
             }
         }
+         stage('Pushing Image to Container') {
+            steps {
+                withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerhubpwd')]) {
+                    echo "Pushing Image to Docker"
+                    bat "docker login -u vistaark9 -p ${dockerhubpwd}"
+                  }
+                    bat 'docker push vistaark9/first-container'
+            }
+        }
     }
 }
