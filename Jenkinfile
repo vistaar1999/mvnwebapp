@@ -20,11 +20,5 @@ pipeline {
                 sh 'docker build -t vistaark9/first-container'
             }
         }
-          stage('Deploy') {
-            steps {
-                echo 'Deploying'
-                deploy adapters: [tomcat9(credentialsId: 'f77e0c68-c9af-42e6-9fd2-78bd57fa9e03', path: '', url: 'http://localhost:8080/')], contextPath: 'mvnwebapp1', onFailure: false, war: '**/*.war'
-            }
-        }
     }
 }
