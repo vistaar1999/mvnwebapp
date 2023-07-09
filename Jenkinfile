@@ -17,7 +17,7 @@ pipeline {
          stage('Building Container') {
             steps {
                 echo 'Building the Container'
-                sh 'docker build -t vistaark9/first-container'
+                bat 'docker build -t vistaark9/first-container'
             }
         }
     }
