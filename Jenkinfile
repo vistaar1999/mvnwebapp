@@ -10,9 +10,8 @@ pipeline {
         }
          stage('Build') {
             steps {
-                @echo off
                 bat 'mvn clean install'
-                echo GIT_COMMIT %GIT_COMMIT%
+                echo 'GIT_COMMIT {env.GIT_COMMIT}'
             }
         }
          stage('Building Container') {
