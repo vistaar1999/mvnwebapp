@@ -6,6 +6,8 @@ pipeline {
             steps {
                 echo 'Checking out from Git Repo'
                 git branch: 'main', changelog: false, credentialsId: 'a77b18a5-7558-4a34-8338-a31ceb2babe9', poll: false, url: 'https://github.com/vistaar1999/mvnwebapp.git'
+                @echo off
+                echo GIT_COMMIT %GIT_COMMIT% 
             }
         }
          stage('Build') {
