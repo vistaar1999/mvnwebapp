@@ -10,8 +10,9 @@ pipeline {
         }
          stage('Build') {
             steps {
-                echo 'Building the Checked-out project '
+                @echo off
                 bat 'mvn clean install'
+                echo GIT_COMMIT %GIT_COMMIT%
             }
         }
          stage('Building Container') {
