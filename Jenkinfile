@@ -11,7 +11,7 @@ pipeline {
          stage('Build') {
             steps {
                 bat 'mvn clean install'
-                echo 'GIT_COMMIT {env.GIT_COMMIT}'
+                echo "GIT_COMMIT ${env.GIT_COMMIT}"
             }
         }
          stage('Building Container') {
