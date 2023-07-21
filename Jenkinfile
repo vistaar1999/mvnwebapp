@@ -1,11 +1,13 @@
+properties([parameters([choice(choices: ['develop', 'main'], description: 'Select the branch to delploy', name: 'Branch')])])
+
 pipeline {
     agent any
 
     stages {
         stage('Git-Checkout') {
             steps {
-                echo 'Checking out Git Project'
-                git branch: 'main', changelog: false, credentialsId: 'a77b18a5-7558-4a34-8338-a31ceb2babe9', poll: false, url: 'https://github.com/vistaar1999/mvnwebapp.git'
+                echo "Checking out from branch ${params.Branch}"
+                git branch: "${params.Branch}", changelog: false, credentialsId: 'a77b18a5-7558-4a34-8338-a31ceb2babe9', poll: false, url: 'https://github.com/vistaar1999/mvnwebapp.git'
             }
         }
          stage('Build') {
