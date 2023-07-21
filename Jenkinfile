@@ -1,4 +1,4 @@
-properties([parameters([choice(choices: ['develop', 'main'], description: 'Select the branch to delploy', name: 'Branch')])])
+properties([parameters([choice(choices: ['develop', 'main'], description: 'Select the branch', name: 'Branch'), string(defaultValue: 'HEAD', description: 'Select the commitID to deploy', name: 'CommitID')])])
 
 pipeline {
     agent any
