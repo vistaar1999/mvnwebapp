@@ -6,15 +6,15 @@ pipeline {
     stages {
         stage('Git-Checkout') {
             steps {
-                echo "Checking out from branch ${params.Branch}"
+                echo "Checking out from branch ${params.branch}"
                 git branch: "${params.branch}", changelog: false, credentialsId: 'a77b18a5-7558-4a34-8338-a31ceb2babe9', poll: false, url: 'https://github.com/vistaar1999/mvnwebapp.git'
             }
         }
          stage('Build') {
             steps {
                 bat 'mvn clean install'
-                echo "GIT_COMMIT ${params.GIT_COMMIT}"
-                echo "GIT_BRANCH ${params.GIT_BRANCH}"
+                echo "GIT_COMMIT ${env.GIT_COMMIT}"
+                echo "GIT_BRANCH ${env.GIT_BRANCH}"
             }
         }
          stage('Building Container') {
