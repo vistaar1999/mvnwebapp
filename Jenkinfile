@@ -1,4 +1,4 @@
-properties([parameters([choice(choices: ['main ', 'develop'], description: 'Choose a branch to build', name: 'branch'), string(defaultValue: 'HEAD', description: 'CommitID to be deployed', name: 'CommitID')])])
+properties([parameters([choice(choices: ['main', 'develop'], description: 'Choose a branch to build', name: 'branch'), string(defaultValue: 'HEAD', description: 'CommitID to be deployed', name: 'CommitID')])])
 
 pipeline {
     agent any
@@ -7,14 +7,14 @@ pipeline {
         stage('Git-Checkout') {
             steps {
                 echo "Checking out from branch ${params.Branch}"
-                git branch: "${params.Branch}", changelog: false, credentialsId: 'a77b18a5-7558-4a34-8338-a31ceb2babe9', poll: false, url: 'https://github.com/vistaar1999/mvnwebapp.git'
+                git branch: "${params.branch}", changelog: false, credentialsId: 'a77b18a5-7558-4a34-8338-a31ceb2babe9', poll: false, url: 'https://github.com/vistaar1999/mvnwebapp.git'
             }
         }
          stage('Build') {
             steps {
                 bat 'mvn clean install'
-                echo "GIT_COMMIT ${env.GIT_COMMIT}"
-                echo "GIT_BRANCH ${env.GIT_BRANCH}"
+                echo "GIT_COMMIT ${params.GIT_COMMIT}"
+                echo "GIT_BRANCH ${params.GIT_BRANCH}"
             }
         }
          stage('Building Container') {
