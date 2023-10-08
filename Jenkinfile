@@ -30,7 +30,7 @@ pipeline {
                     bat "docker login -u vistaark9 -p ${dockerhubpwd}"
                   }
                     bat 'docker push vistaark9/first-container'
-                    bat 'docker run -d -p 8080:8080 vistaark9/first-container'
+                    bat 'docker run --name WebApp -d -p 8080:8080 vistaark9/first-container'
                     bat 'docker ps'
             }
         }
